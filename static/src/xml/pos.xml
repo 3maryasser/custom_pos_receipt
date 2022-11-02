@@ -2,8 +2,17 @@
 <templates id="template" xml:space="preserve">
     <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('pos-receipt-contact')]" position="inside">
-            <h2>Order</h2>
-            <div><h2><t t-esc="receipt.name" /></h2></div>
+            <h3>Order</h3>
+            <div><h3><t t-esc="receipt.name" /></h3></div>
+        </xpath>
+        <xpath expr="//t[@t-foreach='receipt.tax_details']" position="replace">
+            <div></div>
+        </xpath>
+        <xpath expr="//t[@t-foreach='receipt.paymentlines']" position="replace">
+            <div></div>
+        </xpath>
+        <xpath expr="//div[hasclass('receipt-change')]" position="replace">
+            <div></div>
         </xpath>
         <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="after">
             <div>------------------------------------------------------</div>
@@ -46,8 +55,8 @@
                         <div>Served by <t t-esc="receipt.cashier" /></div>
                     </div>
                 </t>
-                <h2>Receipt</h2>
-                <div><h2><t t-esc="receipt.name" /></h2></div>
+                <h3>Receipt</h3>
+                <div><h3><t t-esc="receipt.name" /></h3></div>
             </div>
             <br /><br />
 
@@ -64,12 +73,12 @@
                 <div class="pos-receipt-right-align">--------</div>
                 <br/>
                 <div>Subtotal<span t-esc="env.pos.format_currency(receipt.subtotal)" class="pos-receipt-right-align"/></div>
-                <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
+                <!-- <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
                     <div class="responsive-price">
                         <t t-esc="tax.name" />
                         <span t-esc='env.pos.format_currency_no_symbol(tax.amount)' class="pos-receipt-right-align"/>
                     </div>
-                </t>
+                </t> -->
             </t>
 
             <!-- Total -->
@@ -94,20 +103,20 @@
 
             <!-- Payment Lines -->
 
-            <t t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
+           <!--  <t t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
                 <div>
                     <t t-esc="line.name" />
                     <span t-esc="env.pos.format_currency_no_symbol(line.amount)" class="pos-receipt-right-align"/>
                 </div>
             </t>
-            <br/>
+            <br/> -->
 
 
-            <div class="pos-receipt-amount receipt-change">
+            <!-- <div class="pos-receipt-amount receipt-change">
                 CHANGE
                 <span t-esc="env.pos.format_currency(receipt.change)" class="pos-receipt-right-align"/>
             </div>
-            <br/>
+            <br/> -->
 
 
             <!-- Extra Payment Info -->
