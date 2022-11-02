@@ -3,6 +3,7 @@
     <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('pos-receipt-contact')]" position="inside">
             <h2>Order</h2>
+            <div><h2><t t-esc="receipt.name" /></h2></div>
         </xpath>
         <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="after">
             <div>------------------------------------------------------</div>
@@ -46,12 +47,13 @@
                     </div>
                 </t>
                 <h2>Receipt</h2>
+                <div><h2><t t-esc="receipt.name" /></h2></div>
             </div>
             <br /><br />
 
             <!-- Orderlines -->
 
-            <div class="orderlines">
+            <div>
                 <t t-call="OrderLinesReceipt"/>
             </div>
 
@@ -167,4 +169,6 @@
         </xpath>
 
     </t>
+
+
 </templates>
