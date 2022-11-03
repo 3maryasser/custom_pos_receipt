@@ -16,6 +16,9 @@
         <xpath expr="//div[hasclass('receipt-change')]" position="replace">
             <div></div>
         </xpath>
+        <xpath expr="//t[@t-foreach='receipt.tax_details']" position="replace">
+            <div></div>
+        </xpath>
         <xpath expr="//span[@t-esc='env.pos.format_currency(receipt.total_tax)']" position="replace">
             <div></div>
         </xpath>
