@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
     <t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
-        <xpath expr="//div[hasclass('pos-receipt-contact')]" position="inside">
-            <h3>Order</h3>
-            <div><h3><t t-esc="receipt.name" /></h3></div>
+        <xpath expr="//div[hasclass('pos-receipt-contact')]" position="replace">
+            <div style="text-align:center">
+                <h5>Order</h5>
+                <div><h5><t t-esc="receipt.name" /></h5></div>
+            </div>
         </xpath>
         <xpath expr="//t[@t-foreach='receipt.tax_details']" position="replace">
             <div></div>
@@ -14,7 +16,7 @@
         <xpath expr="//div[hasclass('receipt-change')]" position="replace">
             <div></div>
         </xpath>
-        <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="after">
+        <xpath expr="//div[hasclass('pos-receipt-order-data')]" position="replace">
             <div>------------------------------------------------------</div>
             <br/>
             <t t-if="receipt.company.logo">
@@ -27,38 +29,11 @@
                 </h2>
                 <br/>
             </t>
-            <div class="pos-receipt-contact">
-                <t t-if="receipt.company.contact_address">
-                    <div><t t-esc="receipt.company.contact_address" /></div>
-                </t>
-                <t t-if="receipt.company.phone">
-                    <div>Tel:<t t-esc="receipt.company.phone" /></div>
-                </t>
-                <t t-if="receipt.company.vat">
-                    <div><t t-esc="receipt.company.vat_label"/>:<t t-esc="receipt.company.vat" /></div>
-                </t>
-                <t t-if="receipt.company.email">
-                    <div><t t-esc="receipt.company.email" /></div>
-                </t>
-                <t t-if="receipt.company.website">
-                    <div><t t-esc="receipt.company.website" /></div>
-                </t>
-                <t t-if="receipt.header_html">
-                    <t t-raw="receipt.header_html" />
-                </t>
-                <t t-if="!receipt.header_html and receipt.header">
-                    <div style="white-space:pre-line"><t t-esc="receipt.header" /></div>
-                </t>
-                <t t-if="receipt.cashier">
-                    <div class="cashier">
-                        <div>--------------------------------</div>
-                        <div>Served by <t t-esc="receipt.cashier" /></div>
-                    </div>
-                </t>
-                <h3>Receipt</h3>
-                <div><h3><t t-esc="receipt.name" /></h3></div>
+            <div style="text-align:center">
+                <h5>Receipt</h5>
+                <div><h5><t t-esc="receipt.name" /></h5></div>
             </div>
-            <br /><br />
+            
 
             <!-- Orderlines -->
 
@@ -134,10 +109,10 @@
                         <span t-esc="env.pos.format_currency_no_symbol(tax.amount)" class="pos-receipt-right-align"/>
                     </div>
                 </t>
-                <div>
+                <!-- <div>
                     Total Taxes
                     <span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/>
-                </div>
+                </div> -->
             </t>
 
             <div class="before-footer" />
@@ -166,7 +141,7 @@
             </div>
 
             <br/>
-            <div class="pos-receipt-order-data">
+            <!-- <div class="pos-receipt-order-data">
                 <div><t t-esc="receipt.name" /></div>
                 <t t-if="receipt.date.localestring">
                     <div><t t-esc="receipt.date.localestring" /></div>
@@ -174,7 +149,7 @@
                 <t t-else="">
                     <div><t t-esc="receipt.date.validation_date" /></div>
                 </t>
-            </div>
+            </div> -->
         </xpath>
 
     </t>
